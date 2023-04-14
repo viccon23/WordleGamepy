@@ -1,4 +1,4 @@
-WORDS = [
+WORDSMED = [
 "cigar",
 "rebut",
 "sissy",

@@ -2,12 +2,13 @@ import random
 import sys
 import pygame
 
-from words import *
+from wordsMedium import *
+from wordsEasy import *
+from wordsHard import *
 pygame.init()
 
 # Constants
 WIDTH, HEIGHT = 633, 900
-
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 BACKGROUND = pygame.image.load("assets/Starting Tiles.png")
 BACKGROUND_RECT = BACKGROUND.get_rect(center=(317, 300))
@@ -28,11 +29,34 @@ ALPHABET = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"]
 GUESSED_LETTER_FONT = pygame.font.Font("assets/FreeSansBold.otf", 50)
 AVAILABLE_LETTER_FONT = pygame.font.Font("assets/FreeSansBold.otf", 25)
 
+#Global Variables
+current_guess = []
+
+current_guess_string = ""
+
+## Size of Letter in Text box
+LETTER_SIZE = 75
+current_letter_bg_x = 110
+## Guesses start at zero
+guesses_count = 0
+    # guesses is a 2D list that will store guesses. A guess will be a list of letters.
+    # The list will be iterated through and each letter in each guess will be drawn on the screen.
+## Amount of guesses will be different for every function
+guessesMED = [[]] * 6
+guessesEASY = [[]] * 7
+guessesHARD = [[]] * 4
+
+# Indicators is a list storing all the Indicators object. An indicator basically the keyboard you see when you are playing the game.
+indicators = []
+
+game_result = ""
+#Gets from list of 5-letter words
+CORRECT_WORDEASY = random.choice(WORDSEASY)
+CORRECT_WORDMED = random.choice(WORDSMED)
+CORRECT_WORDHARD = random.choice(WORDSHARD)
 ##############################################################################################################################################################################
 ## FOR MEDIUM MODE
 def mediumMode():
-    # Gets from list of 5-letter words
-    CORRECT_WORD = random.choice(WORDS)
         ## Screen Display
     SCREEN.fill("white")
     SCREEN.blit(BACKGROUND, BACKGROUND_RECT)
@@ -40,26 +64,9 @@ def mediumMode():
 
     LETTER_X_SPACINGMED = 85
     LETTER_Y_SPACINGMED = 12
-    LETTER_SIZE = 75
-
-    # Global variables
-    guesses_count = 0
-
-    # guesses is a 2D list that will store guesses. A guess will be a list of letters.
-    # The list will be iterated through and each letter in each guess will be drawn on the screen.
-    guesses = [[]] * 6
-
-    current_guess = []
-
-    current_guess_string = ""
 
 
-    current_letter_bg_x = 110
 
-    # Indicators is a list storing all the Indicator object. An indicator is that button thing with all the letters you see.
-    indicators = []
-
-    game_result = ""
 
     class Letter:
         def __init__(self, text, bg_position):
@@ -129,8 +136,8 @@ def mediumMode():
         game_decided = False
         for i in range(5):
             lowercase_letter = guess_to_check[i].text.lower()
-            if lowercase_letter in CORRECT_WORD:
-                if lowercase_letter == CORRECT_WORD[i]:
+            if lowercase_letter in CORRECT_WORDMED:
+                if lowercase_letter == CORRECT_WORDMED[i]:
                     guess_to_check[i].bg_color = GREEN
                     for indicator in indicators:
                         if indicator.text == lowercase_letter.upper():
@@ -174,7 +181,7 @@ def mediumMode():
         play_again_font = pygame.font.Font("assets/FreeSansBold.otf", 40)
         play_again_text = play_again_font.render("Press ENTER to Play Again!", True, "black")
         play_again_rect = play_again_text.get_rect(center=(WIDTH/2, 700))
-        word_was_text = play_again_font.render(f"The word was {CORRECT_WORD}!", True, "black")
+        word_was_text = play_again_font.render(f"The word was {CORRECT_WORDMED}!", True, "black")
         word_was_rect = word_was_text.get_rect(center=(WIDTH/2, 650))
         SCREEN.blit(word_was_text, word_was_rect)
         SCREEN.blit(play_again_text, play_again_rect)
@@ -182,12 +189,12 @@ def mediumMode():
 
     def reset():
         # Resets all global variables to their default states.
-        global guesses_count, CORRECT_WORD, guesses, current_guess, current_guess_string, game_result
+        global guesses_count, CORRECT_WORDMED, guessesMED, current_guess, current_guess_string, game_result
         SCREEN.fill("white")
         SCREEN.blit(BACKGROUND, BACKGROUND_RECT)
         guesses_count = 0
-        CORRECT_WORD = random.choice(WORDS)
-        guesses = [[]] * 6
+        CORRECT_WORDMED = random.choice(WORDSMED)
+        guessesMED = [[]] * 6
         current_guess = []
         current_guess_string = ""
         game_result = ""
@@ -202,17 +209,17 @@ def mediumMode():
         current_guess_string += key_pressed
         new_letter = Letter(key_pressed, (current_letter_bg_x, guesses_count*100+LETTER_Y_SPACINGMED))
         current_letter_bg_x += LETTER_X_SPACINGMED
-        guesses[guesses_count].append(new_letter)
+        guessesMED[guesses_count].append(new_letter)
         current_guess.append(new_letter)
-        for guess in guesses:
+        for guess in guessesMED:
             for letter in guess:
                 letter.draw()
 
     def delete_letter():
         # Deletes the last letter from the guess.
         global current_guess_string, current_letter_bg_x
-        guesses[guesses_count][-1].delete()
-        guesses[guesses_count].pop()
+        guessesMED[guesses_count][-1].delete()
+        guessesMED[guesses_count].pop()
         current_guess_string = current_guess_string[:-1]
         current_guess.pop()
         current_letter_bg_x -= LETTER_X_SPACINGMED
@@ -229,7 +236,7 @@ def mediumMode():
                     if game_result != "":
                         reset()
                     else:
-                        if len(current_guess_string) == 5 and current_guess_string.lower() in WORDS:
+                        if len(current_guess_string) == 5 and current_guess_string.lower() in WORDSMED:
                             check_guess(current_guess)
                 elif event.key == pygame.K_BACKSPACE:
                     if len(current_guess_string) > 0:
