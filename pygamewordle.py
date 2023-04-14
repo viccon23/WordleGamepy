@@ -1,8 +1,8 @@
-import pygame
-import sys
 import random
-from words import *
+import sys
+import pygame
 
+from words import *
 pygame.init()
 
 # Constants
