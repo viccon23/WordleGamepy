@@ -13,7 +13,7 @@ BACKGROUND = pygame.image.load("assets/Starting Tiles.png")
 BACKGROUNDEASY = pygame.image.load("assets/StartingTilesEasy.png")
 BACKGROUNDHARD = pygame.image.load("assets/StartingTilesHard.png")
 BACKGROUND_RECT = BACKGROUND.get_rect(center=(317, 300))
-BACKGROUND_RECTEASY = BACKGROUND.get_rect(center=(355, 300))
+BACKGROUND_RECTEASY = BACKGROUND.get_rect(center=(317, 302))
 BACKGROUND_RECTHARD = BACKGROUND.get_rect(center=(320, 300))
 
 
@@ -269,13 +269,13 @@ def easyMode():
     SCREEN.blit(BACKGROUNDEASY, BACKGROUND_RECTEASY)
     pygame.display.update()
     # Easy
-    LETTER_SIZEEASY=50
+    LETTER_SIZEEASY=64
     
 
 
 
-    LETTER_X_SPACINGEASY = 50
-    LETTER_Y_SPACINGEASY = 12
+    LETTER_X_SPACINGEASY = 71
+    LETTER_Y_SPACINGEASY = 15
 
     guessesEASY = [[]] * 7
 
@@ -286,11 +286,12 @@ def easyMode():
             self.bg_color = "white"
             self.text_color = "black"
             self.bg_position = bg_position
-            self.bg_x = bg_position[0]
+            self.bg_x = bg_position[0]+88
             self.bg_y = bg_position[1]
-            self.bg_rect = (bg_position[0], self.bg_y, LETTER_SIZEEASY, LETTER_SIZEEASY)
+            ## Affects the position of rectangles
+            self.bg_rect = (self.bg_x, self.bg_y, LETTER_SIZEEASY, LETTER_SIZEEASY)
             self.text = text
-            self.text_position = (self.bg_x+30, self.bg_position[1]+20)
+            self.text_position = (self.bg_x+32, self.bg_position[1]+30)
             self.text_surface = GUESSED_LETTER_FONT.render(self.text, True, self.text_color)
             self.text_rect = self.text_surface.get_rect(center=self.text_position)
 
@@ -419,7 +420,8 @@ def easyMode():
         # Creates a new letter and adds it to the guess.
         global current_guess_string, current_letter_bg_xEASY
         current_guess_string += key_pressed
-        new_letter = Letter(key_pressed, (current_letter_bg_xEASY, guesses_count*100+LETTER_Y_SPACINGEASY))
+        ## Affects the spacing of the new word guess after each attedmpt
+        new_letter = Letter(key_pressed, (current_letter_bg_xEASY, guesses_count*85+LETTER_Y_SPACINGEASY))
         current_letter_bg_xEASY += LETTER_X_SPACINGEASY
         guessesEASY[guesses_count].append(new_letter)
         current_guess.append(new_letter)
