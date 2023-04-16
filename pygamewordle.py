@@ -3,7 +3,7 @@ import sys
 import pygame
 
 from wordsMedium import *
-from wordsEasy import *
+from WordleGamepy.wordsEasy import *
 from wordsHard import *
 pygame.init()
 # Constants
