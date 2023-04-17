@@ -3,7 +3,7 @@ import sys
 import pygame
 
 from wordsMedium import *
-from WordleGamepy.wordsEasy import *
+from wordsEasy import *
 from wordsHard import *
 pygame.init()
 # Constants
@@ -41,6 +41,7 @@ current_guess_string = ""
 
 current_letter_bg_x = 110
 current_letter_bg_xEASY = 90
+#current_letter_bg_xHARD = ___
 
 
 
@@ -54,7 +55,7 @@ guesses_count = 0
 
 #guessesHARD = [[]] * 4
 
-# Indicators is a list storing all the Indicators object. An indicator basically the keyboard you see when you are playing the game.
+# Indicators is a list storing all the Indicators object. An indicator is basically the keyboard you see when you are playing the game.
 indicators = []
 
 game_result = ""
@@ -70,6 +71,7 @@ def mediumMode():
     SCREEN.blit(BACKGROUND, BACKGROUND_RECT)
     pygame.display.update()
 
+    # Change spacing between each letter input in guess
     LETTER_X_SPACINGMED = 85
     LETTER_Y_SPACINGMED = 12
 
