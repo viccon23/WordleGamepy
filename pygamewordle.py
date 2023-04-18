@@ -14,7 +14,7 @@ BACKGROUNDEASY = pygame.image.load("assets/StartingTilesEasy.png")
 BACKGROUNDHARD = pygame.image.load("assets/StartingTilesHard.png")
 BACKGROUND_RECT = BACKGROUND.get_rect(center=(317, 300))
 BACKGROUND_RECTEASY = BACKGROUND.get_rect(center=(317, 302))
-BACKGROUND_RECTHARD = BACKGROUND.get_rect(center=(320, 300))
+BACKGROUND_RECTHARD = BACKGROUND.get_rect(center=(243, 340))
 
 
 ICON = pygame.image.load("assets/Icon.png")
@@ -50,11 +50,6 @@ current_letter_bg_xHARD = 120
 ## Guesses start at zero
 guesses_count = 0
     # guesses is a 2D list that will store guesses. A guess will be a list of letters.
-    # The list will be iterated through and each letter in each guess will be drawn on the screen.
-## Amount of guesses will be different for every function
-
-
-#guessesHARD = [[]] * 4
 
 # Indicators is a list storing all the Indicators object. An indicator basically the keyboard you see when you are playing the game.
 indicators = []
@@ -261,8 +256,6 @@ def mediumMode():
                     if key_pressed in "QWERTYUIOPASDFGHJKLZXCVBNM" and key_pressed != "":
                         if len(current_guess_string) < 5:
                             create_new_letter()
-
-
 ##############################################################################################################################################################################
 ## FOR EASY MODE
 def easyMode():
@@ -466,20 +459,20 @@ def easyMode():
                             create_new_letter()
 ##############################################################################################################################################################################
 ## FOR HARD MODE
-def hardMODE():
+def hardMode():
        ## Screen Display
     SCREEN.fill("white")
-    SCREEN.blit(BACKGROUND, BACKGROUND_RECT)
+    SCREEN.blit(BACKGROUNDHARD, BACKGROUND_RECTHARD)
     pygame.display.update()
 
-    LETTER_X_SPACINGMED = 85
-    LETTER_Y_SPACINGMED = 12
+    LETTER_X_SPACINGHARD = 96
+    LETTER_Y_SPACINGHARD = 50
 
     ## Size of Letter in Text box
-    LETTER_SIZE = 75
+    LETTER_SIZEHARD = 82
 
     ## Total Number of guesses will be 4
-    guessesMED = [[]] * 4
+    guessesHARD = [[]] * 4
 
 
     class Letter:
@@ -488,11 +481,11 @@ def hardMODE():
             self.bg_color = "white"
             self.text_color = "black"
             self.bg_position = bg_position
-            self.bg_x = bg_position[0]
+            self.bg_x = bg_position[0]-84
             self.bg_y = bg_position[1]
-            self.bg_rect = (bg_position[0], self.bg_y, LETTER_SIZE, LETTER_SIZE)
+            self.bg_rect = (bg_position[0]-84, self.bg_y+5, LETTER_SIZEHARD, LETTER_SIZEHARD)
             self.text = text
-            self.text_position = (self.bg_x+36, self.bg_position[1]+34)
+            self.text_position = (self.bg_x+45, self.bg_position[1]+50)
             self.text_surface = GUESSED_LETTER_FONT.render(self.text, True, self.text_color)
             self.text_rect = self.text_surface.get_rect(center=self.text_position)
 
@@ -546,12 +539,12 @@ def hardMODE():
 
     def check_guess(guess_to_check):
         # Goes through each letter and checks if it should be green, yellow, or grey.
-        global current_guess, current_guess_string, guesses_count, current_letter_bg_x, game_result
+        global current_guess, current_guess_string, guesses_count, current_letter_bg_xHARD, game_result
         game_decided = False
-        for i in range(5):
+        for i in range(6):
             lowercase_letter = guess_to_check[i].text.lower()
-            if lowercase_letter in CORRECT_WORDMED:
-                if lowercase_letter == CORRECT_WORDMED[i]:
+            if lowercase_letter in CORRECT_WORDHARD:
+                if lowercase_letter == CORRECT_WORDHARD[i]:
                     guess_to_check[i].bg_color = GREEN
                     for indicator in indicators:
                         if indicator.text == lowercase_letter.upper():
@@ -584,9 +577,9 @@ def hardMODE():
         guesses_count += 1
         current_guess = []
         current_guess_string = ""
-        current_letter_bg_x = 110
+        current_letter_bg_xHARD = 120
 
-        if guesses_count == 6 and game_result == "":
+        if guesses_count == 4 and game_result == "":
             game_result = "L"
 
     def play_again():
@@ -595,7 +588,7 @@ def hardMODE():
         play_again_font = pygame.font.Font("assets/FreeSansBold.otf", 40)
         play_again_text = play_again_font.render("Press ENTER to Play Again!", True, "black")
         play_again_rect = play_again_text.get_rect(center=(WIDTH/2, 700))
-        word_was_text = play_again_font.render(f"The word was {CORRECT_WORDMED}!", True, "black")
+        word_was_text = play_again_font.render(f"The word was {CORRECT_WORDHARD}!", True, "black")
         word_was_rect = word_was_text.get_rect(center=(WIDTH/2, 650))
         SCREEN.blit(word_was_text, word_was_rect)
         SCREEN.blit(play_again_text, play_again_rect)
@@ -603,12 +596,12 @@ def hardMODE():
 
     def reset():
         # Resets all global variables to their default states.
-        global guesses_count, CORRECT_WORDMED, guessesMED, current_guess, current_guess_string, game_result
+        global guesses_count, CORRECT_WORDHARD, guessesHARD, current_guess, current_guess_string, game_result
         SCREEN.fill("white")
         SCREEN.blit(BACKGROUND, BACKGROUND_RECT)
         guesses_count = 0
-        CORRECT_WORDMED = random.choice(WORDSMED)
-        guessesMED = [[]] * 6
+        CORRECT_WORDHARD = random.choice(WORDSHARD)
+        guessesHARD = [[]] * 4
         current_guess = []
         current_guess_string = ""
         game_result = ""
@@ -619,24 +612,24 @@ def hardMODE():
 
     def create_new_letter():
         # Creates a new letter and adds it to the guess.
-        global current_guess_string, current_letter_bg_x
+        global current_guess_string, current_letter_bg_xHARD
         current_guess_string += key_pressed
-        new_letter = Letter(key_pressed, (current_letter_bg_x, guesses_count*100+LETTER_Y_SPACINGMED))
-        current_letter_bg_x += LETTER_X_SPACINGMED
-        guessesMED[guesses_count].append(new_letter)
+        new_letter = Letter(key_pressed, (current_letter_bg_xHARD, guesses_count*112+LETTER_Y_SPACINGHARD))
+        current_letter_bg_xHARD += LETTER_X_SPACINGHARD
+        guessesHARD[guesses_count].append(new_letter)
         current_guess.append(new_letter)
-        for guess in guessesMED:
+        for guess in guessesHARD:
             for letter in guess:
                 letter.draw()
 
     def delete_letter():
         # Deletes the last letter from the guess.
-        global current_guess_string, current_letter_bg_x
-        guessesMED[guesses_count][-1].delete()
-        guessesMED[guesses_count].pop()
+        global current_guess_string, current_letter_bg_xHARD
+        guessesHARD[guesses_count][-1].delete()
+        guessesHARD[guesses_count].pop()
         current_guess_string = current_guess_string[:-1]
         current_guess.pop()
-        current_letter_bg_x -= LETTER_X_SPACINGMED
+        current_letter_bg_xHARD -= LETTER_X_SPACINGHARD
 
     while True:
         if game_result != "":
@@ -651,7 +644,7 @@ def hardMODE():
                         reset()
                         titleScreen()
                     else:
-                        if len(current_guess_string) == 5 and current_guess_string.lower() in WORDSMED:
+                        if len(current_guess_string) == 6 and current_guess_string.lower() in WORDSHARD:
                             check_guess(current_guess)
                 elif event.key == pygame.K_BACKSPACE:
                     if len(current_guess_string) > 0:
@@ -659,9 +652,8 @@ def hardMODE():
                 else:
                     key_pressed = event.unicode.upper()
                     if key_pressed in "QWERTYUIOPASDFGHJKLZXCVBNM" and key_pressed != "":
-                        if len(current_guess_string) < 5:
+                        if len(current_guess_string) < 6:
                             create_new_letter()
-
 ##############################################################################################################################################################################
 ## Title Screen
 def titleScreen():
@@ -710,7 +702,7 @@ def titleScreen():
                 elif medium_button_rect.collidepoint(event.pos):
                     mediumMode()
                 elif hard_button_rect.collidepoint(event.pos):
-                    pass
+                    hardMode()
                     
         # Draw the screen
         screen.fill((255, 255, 255))
