@@ -42,11 +42,7 @@ current_guess_string = ""
 
 current_letter_bg_x = 110
 current_letter_bg_xEASY = 90
-<<<<<<< HEAD
 current_letter_bg_xHARD = 120
-=======
-#current_letter_bg_xHARD = ___
->>>>>>> 7563b352f75ee6fbd41f5e0da0ce445890ac5be3
 
 
 
