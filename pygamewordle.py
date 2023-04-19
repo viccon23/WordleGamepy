@@ -307,7 +307,6 @@ def mediumMode():
         count = upTimer(count)
         if game_result != "":
             play_again()
-            count = Timer()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -538,7 +537,7 @@ def easyMode():
     
     def upTimer(frame_count):
         frame_rate = 60
-        start_time = 5
+        start_time = 360
         pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 105, 25))
         total_seconds = start_time - (frame_count // frame_rate)
         if total_seconds < 0:
