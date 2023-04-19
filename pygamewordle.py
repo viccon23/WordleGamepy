@@ -7,7 +7,7 @@ from wordsEasy import *
 from wordsHard import *
 pygame.init()
 # Constants
-WIDTH, HEIGHT = 633, 900
+WIDTH, HEIGHT = 633, 650
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 BACKGROUND = pygame.image.load("assets/Starting Tiles.png")
 BACKGROUNDEASY = pygame.image.load("assets/StartingTilesEasy.png")
@@ -27,12 +27,16 @@ YELLOW = "#c9b458"
 GREY = "#787c7e"
 OUTLINE = "#d3d6da"
 FILLED_OUTLINE = "#878a8c"
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
 
 ## Keyboard
 ALPHABET = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"]
 ##Letter Font
 GUESSED_LETTER_FONT = pygame.font.Font("assets/FreeSansBold.otf", 50)
 AVAILABLE_LETTER_FONT = pygame.font.Font("assets/FreeSansBold.otf", 25)
+FONT = pygame.font.Font("assets/FreeSansBold.otf", 15)
 
 #Global Variables
     #List of guesses starts empty
@@ -44,7 +48,8 @@ current_letter_bg_x = 110
 current_letter_bg_xEASY = 90
 current_letter_bg_xHARD = 120
 
-
+#Clock variable
+Clock = pygame.time.Clock()
 
 
 ## Guesses start at zero
@@ -234,7 +239,69 @@ def mediumMode():
         current_guess.pop()
         current_letter_bg_x -= LETTER_X_SPACINGMED
 
+    def Timer():
+        frame_count = 0
+        frame_rate = 60
+        start_time = 300     
+    
+        # --- Timer going down ---
+        # --- Timer going up ---
+        # Calculate total seconds
+        total_seconds = start_time - (frame_count // frame_rate)
+
+        # Divide by 60 to get total minutes
+        minutes = total_seconds // 60
+        # Use modulus (remainder) to get seconds
+        seconds = total_seconds % 60
+        # Use python string formatting to format in leading zeros
+        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
+        # Blit to the screen
+        text = FONT.render(output_string, True, BLACK)
+        SCREEN.blit(text, [0, 0])
+    
+        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+        frame_count += 1
+    
+        # Limit frames per second
+        Clock.tick(frame_rate)
+    
+        # Go ahead and update the screen with what we've drawn.
+        pygame.display.flip()
+        return frame_count
+    
+    def upTimer(frame_count):
+        frame_rate = 60
+        start_time = 300
+        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 105, 25))
+        total_seconds = start_time - (frame_count // frame_rate)
+        if total_seconds < 0:
+            total_seconds = 0
+
+            
+        # Divide by 60 to get total minutes
+        minutes = total_seconds // 60
+        # Use modulus (remainder) to get seconds
+        seconds = total_seconds % 60
+        # Use python string formatting to format in leading zeros
+        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
+        # Blit to the screen
+        text = FONT.render(output_string, True, BLACK)
+        SCREEN.blit(text, [0, 0])
+    
+        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+        frame_count += 1
+    
+        # Limit frames per second
+        Clock.tick(frame_rate)
+    
+        # Go ahead and update the screen with what we've drawn.
+        pygame.display.flip()
+        return frame_count
+    
+    count = 0
+    count = Timer()
     while True:
+        count = upTimer(count)
         if game_result != "":
             play_again()
         for event in pygame.event.get():
@@ -433,8 +500,71 @@ def easyMode():
         current_guess_string = current_guess_string[:-1]
         current_guess.pop()
         current_letter_bg_xEASY -= LETTER_X_SPACINGEASY
+    
+    def Timer():
+        frame_count = 0
+        frame_rate = 60
+        start_time = 360     
+    
+        # --- Timer going down ---
+        # --- Timer going up ---
+        # Calculate total seconds
+        total_seconds = start_time - (frame_count // frame_rate)
+        if total_seconds < 0:
+            total_seconds = 0
+        # Divide by 60 to get total minutes
+        minutes = total_seconds // 60
+        # Use modulus (remainder) to get seconds
+        seconds = total_seconds % 60
+        # Use python string formatting to format in leading zeros
+        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
+        # Blit to the screen
+        text = FONT.render(output_string, True, BLACK)
+        SCREEN.blit(text, [0, 0])
+    
+        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+        frame_count += 1
+    
+        # Limit frames per second
+        Clock.tick(frame_rate)
+    
+        # Go ahead and update the screen with what we've drawn.
+        pygame.display.flip()
+        return frame_count
+    
+    def upTimer(frame_count):
+        frame_rate = 60
+        start_time = 360
+        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 110, 25))
+        total_seconds = start_time - (frame_count // frame_rate)
+        if total_seconds < 0:
+            total_seconds = 0
+            pygame.quit()
+            
+        # Divide by 60 to get total minutes
+        minutes = total_seconds // 60
+        # Use modulus (remainder) to get seconds
+        seconds = total_seconds % 60
+        # Use python string formatting to format in leading zeros
+        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
+        # Blit to the screen
+        text = FONT.render(output_string, True, BLACK)
+        SCREEN.blit(text, [0, 0])
+    
+        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+        frame_count += 1
+    
+        # Limit frames per second
+        Clock.tick(frame_rate)
+    
+        # Go ahead and update the screen with what we've drawn.
+        pygame.display.flip()
+        return frame_count
 
+    count = 0
+    count = Timer()
     while True:
+        count = upTimer(count)
         if game_result != "":
             play_again()
         for event in pygame.event.get():
@@ -632,7 +762,70 @@ def hardMode():
         current_guess.pop()
         current_letter_bg_xHARD -= LETTER_X_SPACINGHARD
 
+    def Timer():
+        frame_count = 0
+        frame_rate = 60
+        start_time = 240     
+    
+        # --- Timer going down ---
+        # --- Timer going up ---
+        # Calculate total seconds
+        total_seconds = start_time - (frame_count // frame_rate)
+        if total_seconds < 0:
+            total_seconds = 0
+        # Divide by 60 to get total minutes
+        minutes = total_seconds // 60
+        # Use modulus (remainder) to get seconds
+        seconds = total_seconds % 60
+        # Use python string formatting to format in leading zeros
+        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
+        # Blit to the screen
+        text = FONT.render(output_string, True, BLACK)
+        SCREEN.blit(text, [0, 0])
+    
+        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+        frame_count += 1
+    
+        # Limit frames per second
+        Clock.tick(frame_rate)
+    
+        # Go ahead and update the screen with what we've drawn.
+        pygame.display.flip()
+        return frame_count
+    
+    def upTimer(frame_count):
+        frame_rate = 60
+        start_time = 240
+        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 110, 25))
+        total_seconds = start_time - (frame_count // frame_rate)
+        if total_seconds < 0:
+            total_seconds = 0
+            pygame.quit()
+            
+        # Divide by 60 to get total minutes
+        minutes = total_seconds // 60
+        # Use modulus (remainder) to get seconds
+        seconds = total_seconds % 60
+        # Use python string formatting to format in leading zeros
+        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
+        # Blit to the screen
+        text = FONT.render(output_string, True, BLACK)
+        SCREEN.blit(text, [0, 0])
+    
+        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+        frame_count += 1
+    
+        # Limit frames per second
+        Clock.tick(frame_rate)
+    
+        # Go ahead and update the screen with what we've drawn.
+        pygame.display.flip()
+        return frame_count
+
+    count = 0
+    count = Timer()
     while True:
+        count = upTimer(count)
         if game_result != "":
             play_again()
         for event in pygame.event.get():
@@ -724,5 +917,4 @@ def titleScreen():
 
 # Program will start with Title Screen
 titleScreen()
-
 
