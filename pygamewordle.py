@@ -7,7 +7,7 @@ from wordsEasy import *
 from wordsHard import *
 pygame.init()
 # Constants
-WIDTH, HEIGHT = 633, 900
+WIDTH, HEIGHT = 633, 650
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 BACKGROUND = pygame.image.load("assets/Starting Tiles.png")
 BACKGROUNDEASY = pygame.image.load("assets/StartingTilesEasy.png")
@@ -276,26 +276,28 @@ def mediumMode():
         total_seconds = start_time - (frame_count // frame_rate)
         if total_seconds < 0:
             total_seconds = 0
+            play_again()
+        else:
 
             
-        # Divide by 60 to get total minutes
-        minutes = total_seconds // 60
-        # Use modulus (remainder) to get seconds
-        seconds = total_seconds % 60
-        # Use python string formatting to format in leading zeros
-        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
-        # Blit to the screen
-        text = FONT.render(output_string, True, BLACK)
-        SCREEN.blit(text, [0, 0])
-    
-        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
-        frame_count += 1
-    
-        # Limit frames per second
-        Clock.tick(frame_rate)
-    
-        # Go ahead and update the screen with what we've drawn.
-        pygame.display.flip()
+            # Divide by 60 to get total minutes
+            minutes = total_seconds // 60
+            # Use modulus (remainder) to get seconds
+            seconds = total_seconds % 60
+            # Use python string formatting to format in leading zeros
+            output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
+            # Blit to the screen
+            text = FONT.render(output_string, True, BLACK)
+            SCREEN.blit(text, [0, 0])
+        
+            # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+            frame_count += 1
+        
+            # Limit frames per second
+            Clock.tick(frame_rate)
+        
+            # Go ahead and update the screen with what we've drawn.
+            pygame.display.flip()
         return frame_count
     
     count = 0
@@ -304,6 +306,7 @@ def mediumMode():
         count = upTimer(count)
         if game_result != "":
             play_again()
+            # count = Timer()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -535,30 +538,32 @@ def easyMode():
     def upTimer(frame_count):
         frame_rate = 60
         start_time = 360
-        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 110, 25))
+        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 105, 25))
         total_seconds = start_time - (frame_count // frame_rate)
         if total_seconds < 0:
             total_seconds = 0
-            pygame.quit()
+            play_again()
+        else:
+
             
-        # Divide by 60 to get total minutes
-        minutes = total_seconds // 60
-        # Use modulus (remainder) to get seconds
-        seconds = total_seconds % 60
-        # Use python string formatting to format in leading zeros
-        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
-        # Blit to the screen
-        text = FONT.render(output_string, True, BLACK)
-        SCREEN.blit(text, [0, 0])
-    
-        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
-        frame_count += 1
-    
-        # Limit frames per second
-        Clock.tick(frame_rate)
-    
-        # Go ahead and update the screen with what we've drawn.
-        pygame.display.flip()
+            # Divide by 60 to get total minutes
+            minutes = total_seconds // 60
+            # Use modulus (remainder) to get seconds
+            seconds = total_seconds % 60
+            # Use python string formatting to format in leading zeros
+            output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
+            # Blit to the screen
+            text = FONT.render(output_string, True, BLACK)
+            SCREEN.blit(text, [0, 0])
+        
+            # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+            frame_count += 1
+        
+            # Limit frames per second
+            Clock.tick(frame_rate)
+        
+            # Go ahead and update the screen with what we've drawn.
+            pygame.display.flip()
         return frame_count
 
     count = 0
@@ -796,30 +801,32 @@ def hardMode():
     def upTimer(frame_count):
         frame_rate = 60
         start_time = 240
-        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 110, 25))
+        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 105, 25))
         total_seconds = start_time - (frame_count // frame_rate)
         if total_seconds < 0:
             total_seconds = 0
-            pygame.quit()
+            play_again()
+        else:
+
             
-        # Divide by 60 to get total minutes
-        minutes = total_seconds // 60
-        # Use modulus (remainder) to get seconds
-        seconds = total_seconds % 60
-        # Use python string formatting to format in leading zeros
-        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
-        # Blit to the screen
-        text = FONT.render(output_string, True, BLACK)
-        SCREEN.blit(text, [0, 0])
-    
-        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
-        frame_count += 1
-    
-        # Limit frames per second
-        Clock.tick(frame_rate)
-    
-        # Go ahead and update the screen with what we've drawn.
-        pygame.display.flip()
+            # Divide by 60 to get total minutes
+            minutes = total_seconds // 60
+            # Use modulus (remainder) to get seconds
+            seconds = total_seconds % 60
+            # Use python string formatting to format in leading zeros
+            output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
+            # Blit to the screen
+            text = FONT.render(output_string, True, BLACK)
+            SCREEN.blit(text, [0, 0])
+        
+            # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+            frame_count += 1
+        
+            # Limit frames per second
+            Clock.tick(frame_rate)
+        
+            # Go ahead and update the screen with what we've drawn.
+            pygame.display.flip()
         return frame_count
 
     count = 0
