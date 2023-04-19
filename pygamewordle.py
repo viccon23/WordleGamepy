@@ -276,7 +276,7 @@ def mediumMode():
         total_seconds = start_time - (frame_count // frame_rate)
         if total_seconds < 0:
             total_seconds = 0
-            play_again()
+            game_result != ""
         else:
 
             
@@ -800,12 +800,12 @@ def hardMode():
     
     def upTimer(frame_count):
         frame_rate = 60
-        start_time = 240
+        start_time = 5
         pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 105, 25))
         total_seconds = start_time - (frame_count // frame_rate)
-        if total_seconds < 0:
+        if total_seconds < 0 and game_result == "":
             total_seconds = 0
-            play_again()
+            game_result = "L"
         else:
 
             
