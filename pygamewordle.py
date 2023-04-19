@@ -7,7 +7,7 @@ from wordsEasy import *
 from wordsHard import *
 pygame.init()
 # Constants
-WIDTH, HEIGHT = 633, 650
+WIDTH, HEIGHT = 650, 900
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 BACKGROUND = pygame.image.load("assets/Starting Tiles.png")
 BACKGROUNDEASY = pygame.image.load("assets/StartingTilesEasy.png")
