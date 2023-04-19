@@ -276,7 +276,8 @@ def mediumMode():
         total_seconds = start_time - (frame_count // frame_rate)
         if total_seconds < 0:
             total_seconds = 0
-            game_result != ""
+            global game_result
+            game_result = "L"
         else:
 
             
@@ -807,7 +808,8 @@ def hardMode():
         total_seconds = start_time - (frame_count // frame_rate)
         if total_seconds < 0:
             total_seconds = 0
-            play_again()
+            global game_result
+            game_result = "L"
         else:
 
             
