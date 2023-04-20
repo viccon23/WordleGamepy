@@ -181,7 +181,7 @@ def mediumMode():
                 game_decided = True
             guess_to_check[i].draw()
             pygame.display.update()
-        
+       
         guesses_count += 1
         current_guess = []
         current_guess_string = ""
@@ -243,7 +243,7 @@ def mediumMode():
         frame_count = 0
         frame_rate = 60
         start_time = 300     
-    
+   
         # --- Timer going down ---
         # --- Timer going up ---
         # Calculate total seconds
@@ -258,17 +258,17 @@ def mediumMode():
         # Blit to the screen
         text = FONT.render(output_string, True, BLACK)
         SCREEN.blit(text, [0, 0])
-    
+   
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
         frame_count += 1
-    
+   
         # Limit frames per second
         Clock.tick(frame_rate)
-    
+   
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
         return frame_count
-    
+   
     def upTimer(frame_count):
         frame_rate = 60
         start_time = 300
@@ -280,7 +280,7 @@ def mediumMode():
             game_result = "L"
         else:
 
-            
+           
             # Divide by 60 to get total minutes
             minutes = total_seconds // 60
             # Use modulus (remainder) to get seconds
@@ -290,23 +290,24 @@ def mediumMode():
             # Blit to the screen
             text = FONT.render(output_string, True, BLACK)
             SCREEN.blit(text, [0, 0])
-        
+       
             # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
             frame_count += 1
-        
+       
             # Limit frames per second
             Clock.tick(frame_rate)
-        
+       
             # Go ahead and update the screen with what we've drawn.
             pygame.display.flip()
         return frame_count
-    
+   
     count = 0
     count = Timer()
     while True:
         count = upTimer(count)
         if game_result != "":
             play_again()
+            count = Timer()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -336,7 +337,7 @@ def easyMode():
     pygame.display.update()
     # Easy
     LETTER_SIZEEASY=64
-    
+   
 
 
 
@@ -445,7 +446,7 @@ def easyMode():
                 game_decided = True
             guess_to_check[i].draw()
             pygame.display.update()
-        
+       
         guesses_count += 1
         current_guess = []
         current_guess_string = ""
@@ -503,12 +504,12 @@ def easyMode():
         current_guess_string = current_guess_string[:-1]
         current_guess.pop()
         current_letter_bg_xEASY -= LETTER_X_SPACINGEASY
-    
+   
     def Timer():
         frame_count = 0
         frame_rate = 60
         start_time = 360     
-    
+   
         # --- Timer going down ---
         # --- Timer going up ---
         # Calculate total seconds
@@ -524,17 +525,17 @@ def easyMode():
         # Blit to the screen
         text = FONT.render(output_string, True, BLACK)
         SCREEN.blit(text, [0, 0])
-    
+   
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
         frame_count += 1
-    
+   
         # Limit frames per second
         Clock.tick(frame_rate)
-    
+   
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
         return frame_count
-    
+   
     def upTimer(frame_count):
         frame_rate = 60
         start_time = 360
@@ -547,7 +548,7 @@ def easyMode():
 
         else:
 
-            
+           
             # Divide by 60 to get total minutes
             minutes = total_seconds // 60
             # Use modulus (remainder) to get seconds
@@ -557,13 +558,13 @@ def easyMode():
             # Blit to the screen
             text = FONT.render(output_string, True, BLACK)
             SCREEN.blit(text, [0, 0])
-        
+       
             # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
             frame_count += 1
-        
+       
             # Limit frames per second
             Clock.tick(frame_rate)
-        
+       
             # Go ahead and update the screen with what we've drawn.
             pygame.display.flip()
         return frame_count
@@ -711,7 +712,7 @@ def hardMode():
                 game_decided = True
             guess_to_check[i].draw()
             pygame.display.update()
-        
+       
         guesses_count += 1
         current_guess = []
         current_guess_string = ""
@@ -773,7 +774,7 @@ def hardMode():
         frame_count = 0
         frame_rate = 60
         start_time = 240     
-    
+   
         # --- Timer going down ---
         # --- Timer going up ---
         # Calculate total seconds
@@ -789,17 +790,17 @@ def hardMode():
         # Blit to the screen
         text = FONT.render(output_string, True, BLACK)
         SCREEN.blit(text, [0, 0])
-    
+   
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
         frame_count += 1
-    
+   
         # Limit frames per second
         Clock.tick(frame_rate)
-    
+   
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
         return frame_count
-    
+   
     def upTimer(frame_count):
         frame_rate = 60
         start_time = 240
@@ -811,7 +812,7 @@ def hardMode():
             game_result = "L"
         else:
 
-            
+           
             # Divide by 60 to get total minutes
             minutes = total_seconds // 60
             # Use modulus (remainder) to get seconds
@@ -821,13 +822,13 @@ def hardMode():
             # Blit to the screen
             text = FONT.render(output_string, True, BLACK)
             SCREEN.blit(text, [0, 0])
-        
+       
             # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
             frame_count += 1
-        
+       
             # Limit frames per second
             Clock.tick(frame_rate)
-        
+       
             # Go ahead and update the screen with what we've drawn.
             pygame.display.flip()
         return frame_count
@@ -861,6 +862,7 @@ def hardMode():
 ##############################################################################################################################################################################
 ## Title Screen
 def titleScreen():
+   
     SCREEN.fill("white")
     SCREEN.blit(BACKGROUND, BACKGROUND_RECT)
     pygame.display.update
@@ -892,6 +894,11 @@ def titleScreen():
     hard_button_text = font.render("Hard", True, (0, 0, 0))
     hard_button_text_rect = hard_button_text.get_rect(center=hard_button_rect.center)
 
+    # Create the rules button
+    rules_button_rect = pygame.Rect(20, 20, button_width, button_height)
+    rules_button_text = font.render("Rules", True, (0, 0, 0))
+    rules_button_text_rect = rules_button_text.get_rect(center=rules_button_rect.center)
+
     # Main game loop
     running = True
     while running:
@@ -907,24 +914,75 @@ def titleScreen():
                     mediumMode()
                 elif hard_button_rect.collidepoint(event.pos):
                     hardMode()
-                    
+                elif rules_button_rect.collidepoint(event.pos):
+                    rulesMenu()
+                   
         # Draw the screen
         screen.fill((255, 255, 255))
+        bg = pygame.image.load('assets/bg.jpg') 
+        screen.blit(bg,(0, 0))
         screen.blit(title_text, title_rect)
         pygame.draw.rect(screen, (0, 0, 0), easy_button_rect, 3) # draw outer rectangle
         pygame.draw.rect(screen, (255, 255, 255), easy_button_rect.inflate(-6, -6)) # draw inner rectangle
         screen.blit(easy_button_text, easy_button_text_rect)
         pygame.draw.rect(screen, (0, 0, 0), medium_button_rect, 3) # draw outer rectangle
-        pygame.draw.rect(screen, (255, 255, 255), medium_button_rect.inflate(-6, -6)) # draw inner rectangle
+        pygame.draw.rect(screen, (255, 255, 255), medium_button_rect.inflate(-6,-6))
         screen.blit(medium_button_text, medium_button_text_rect)
         pygame.draw.rect(screen, (0, 0, 0), hard_button_rect, 3) # draw outer rectangle
         pygame.draw.rect(screen, (255, 255, 255), hard_button_rect.inflate(-6, -6)) # draw inner rectangle
         screen.blit(hard_button_text, hard_button_text_rect)
+        pygame.draw.rect(screen, (0, 0, 0), rules_button_rect, 3) # draw outer rectangle
+        pygame.draw.rect(screen, (255, 255, 255), rules_button_rect.inflate(-6, -6)) # draw inner rectangle
+        screen.blit(rules_button_text, rules_button_text_rect)
         pygame.display.flip()
     # Clean up
     pygame.quit()
+                         
+def rulesMenu():  
+# Set up the display
+    screen_width, screen_height = WIDTH, HEIGHT
+    screen = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption("Rules")
+
+    # Set up the font
+    font = pygame.font.SysFont("Arial", 32)
+
+    # Create the rules text surface
+    rules_text = font.render("Guess the hidden word in 6 tries or less!", True, (0, 0, 0))
+    rules_rect = rules_text.get_rect(center=(screen_width/2, screen_height/4))
+
+    # Create the back button
+    button_width, button_height = 100, 50
+    button_x, button_y = 20, screen_height - button_height - 20
+    back_button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+    back_button_text = font.render("Back", True, (0, 0, 0))
+    back_button_text_rect = back_button_text.get_rect(center=back_button_rect.center)
+
+    # Main game loop
+    running = True
+    while running:
+        # Handle events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                # Check if the back button was clicked
+                if back_button_rect.collidepoint(event.pos):
+                    titleScreen()
+
+        # Draw the screen
+        screen.fill((255, 255, 255))
+        screen.blit(rules_text, rules_rect)
+        pygame.draw.rect(screen, (0, 0, 0), back_button_rect, 3) # draw outer rectangle
+        pygame.draw.rect(screen, (255, 255, 255), back_button_rect.inflate(-6, -6)) # draw inner rectangle
+        screen.blit(back_button_text, back_button_text_rect)
+
+        pygame.display.update()
+
+    pygame.quit()
+    sys.exit()# Quit the game
+   
 
 
 # Program will start with Title Screen
 titleScreen()
-
