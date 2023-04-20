@@ -238,41 +238,11 @@ def mediumMode():
         current_guess_string = current_guess_string[:-1]
         current_guess.pop()
         current_letter_bg_x -= LETTER_X_SPACINGMED
-
-    def Timer():
-        frame_count = 0
-        frame_rate = 60
-        start_time = 300     
-    
-        # --- Timer going down ---
-        # --- Timer going up ---
-        # Calculate total seconds
-        total_seconds = start_time - (frame_count // frame_rate)
-
-        # Divide by 60 to get total minutes
-        minutes = total_seconds // 60
-        # Use modulus (remainder) to get seconds
-        seconds = total_seconds % 60
-        # Use python string formatting to format in leading zeros
-        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
-        # Blit to the screen
-        text = FONT.render(output_string, True, BLACK)
-        SCREEN.blit(text, [0, 0])
-    
-        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
-        frame_count += 1
-    
-        # Limit frames per second
-        Clock.tick(frame_rate)
-    
-        # Go ahead and update the screen with what we've drawn.
-        pygame.display.flip()
-        return frame_count
     
     def upTimer(frame_count):
         frame_rate = 60
         start_time = 300
-        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 105, 25))
+        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(540, 0, 105, 25))
         total_seconds = start_time - (frame_count // frame_rate)
         if total_seconds < 0:
             total_seconds = 0
@@ -289,7 +259,7 @@ def mediumMode():
             output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
             # Blit to the screen
             text = FONT.render(output_string, True, BLACK)
-            SCREEN.blit(text, [0, 0])
+            SCREEN.blit(text, [540, 0])
         
             # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
             frame_count += 1
@@ -302,7 +272,6 @@ def mediumMode():
         return frame_count
     
     count = 0
-    count = Timer()
     while True:
         count = upTimer(count)
         if game_result != "":
@@ -504,47 +473,15 @@ def easyMode():
         current_guess.pop()
         current_letter_bg_xEASY -= LETTER_X_SPACINGEASY
     
-    def Timer():
-        frame_count = 0
-        frame_rate = 60
-        start_time = 360     
-    
-        # --- Timer going down ---
-        # --- Timer going up ---
-        # Calculate total seconds
-        total_seconds = start_time - (frame_count // frame_rate)
-        if total_seconds < 0:
-            total_seconds = 0
-        # Divide by 60 to get total minutes
-        minutes = total_seconds // 60
-        # Use modulus (remainder) to get seconds
-        seconds = total_seconds % 60
-        # Use python string formatting to format in leading zeros
-        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
-        # Blit to the screen
-        text = FONT.render(output_string, True, BLACK)
-        SCREEN.blit(text, [0, 0])
-    
-        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
-        frame_count += 1
-    
-        # Limit frames per second
-        Clock.tick(frame_rate)
-    
-        # Go ahead and update the screen with what we've drawn.
-        pygame.display.flip()
-        return frame_count
-    
     def upTimer(frame_count):
         frame_rate = 60
         start_time = 360
-        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 105, 25))
+        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(540, 0, 105, 25))
         total_seconds = start_time - (frame_count // frame_rate)
         if total_seconds < 0:
             total_seconds = 0
             global game_result
             game_result = "L"
-
         else:
 
             
@@ -556,7 +493,7 @@ def easyMode():
             output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
             # Blit to the screen
             text = FONT.render(output_string, True, BLACK)
-            SCREEN.blit(text, [0, 0])
+            SCREEN.blit(text, [540, 0])
         
             # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
             frame_count += 1
@@ -569,7 +506,6 @@ def easyMode():
         return frame_count
 
     count = 0
-    count = Timer()
     while True:
         count = upTimer(count)
         if game_result != "":
@@ -769,41 +705,10 @@ def hardMode():
         current_guess.pop()
         current_letter_bg_xHARD -= LETTER_X_SPACINGHARD
 
-    def Timer():
-        frame_count = 0
-        frame_rate = 60
-        start_time = 240     
-    
-        # --- Timer going down ---
-        # --- Timer going up ---
-        # Calculate total seconds
-        total_seconds = start_time - (frame_count // frame_rate)
-        if total_seconds < 0:
-            total_seconds = 0
-        # Divide by 60 to get total minutes
-        minutes = total_seconds // 60
-        # Use modulus (remainder) to get seconds
-        seconds = total_seconds % 60
-        # Use python string formatting to format in leading zeros
-        output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
-        # Blit to the screen
-        text = FONT.render(output_string, True, BLACK)
-        SCREEN.blit(text, [0, 0])
-    
-        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
-        frame_count += 1
-    
-        # Limit frames per second
-        Clock.tick(frame_rate)
-    
-        # Go ahead and update the screen with what we've drawn.
-        pygame.display.flip()
-        return frame_count
-    
     def upTimer(frame_count):
         frame_rate = 60
         start_time = 240
-        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(0, 0, 105, 25))
+        pygame.draw.rect(SCREEN, WHITE, pygame.Rect(540, 0, 105, 25))
         total_seconds = start_time - (frame_count // frame_rate)
         if total_seconds < 0:
             total_seconds = 0
@@ -820,7 +725,7 @@ def hardMode():
             output_string = "Time left: {0:02}:{1:02}".format(minutes, seconds)
             # Blit to the screen
             text = FONT.render(output_string, True, BLACK)
-            SCREEN.blit(text, [0, 0])
+            SCREEN.blit(text, [540, 0])
         
             # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
             frame_count += 1
@@ -833,7 +738,6 @@ def hardMode():
         return frame_count
 
     count = 0
-    count = Timer()
     while True:
         count = upTimer(count)
         if game_result != "":
@@ -927,4 +831,3 @@ def titleScreen():
 
 # Program will start with Title Screen
 titleScreen()
-
