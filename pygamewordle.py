@@ -817,7 +817,7 @@ def titleScreen():
     # Set up the display
     screen_width, screen_height = WIDTH, HEIGHT
     screen = pygame.display.set_mode((screen_width, screen_height))
-    pygame.display.set_caption("Wordle")
+    pygame.display.set_caption("What's the Wordie")
 
     # Create the title font
     title_font = pygame.font.SysFont("Arial", 120)
@@ -825,7 +825,7 @@ def titleScreen():
     font = pygame.font.SysFont("Arial", 52)
 
     # Create the title text surface
-    title_text = title_font.render("Wordle", True, (0, 0, 0))
+    title_text = title_font.render("Wordie", True, (0, 0, 0))
     title_rect = title_text.get_rect(center=(screen_width/2, screen_height/4))
 
     # Create the difficulty buttons
