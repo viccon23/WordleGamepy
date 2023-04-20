@@ -817,7 +817,7 @@ def titleScreen():
     # Set up the display
     screen_width, screen_height = WIDTH, HEIGHT
     screen = pygame.display.set_mode((screen_width, screen_height))
-    pygame.display.set_caption("Wordle")
+    pygame.display.set_caption("What's the Wordie")
 
     # Create the title font
     title_font = pygame.font.SysFont("Arial", 120)
@@ -825,7 +825,7 @@ def titleScreen():
     font = pygame.font.SysFont("Arial", 52)
 
     # Create the title text surface
-    title_text = title_font.render("Wordle", True, (0, 0, 0))
+    title_text = title_font.render("Wordie", True, (0, 0, 0))
     title_rect = title_text.get_rect(center=(screen_width/2, screen_height/4))
 
     # Create the difficulty buttons
@@ -894,10 +894,6 @@ def rulesMenu():
     # Set up the font
     font = pygame.font.SysFont("Arial", 32)
 
-    # Create the rules text surface
-    rules_text = font.render("Guess the hidden word in 6 tries or less!", True, (0, 0, 0))
-    rules_rect = rules_text.get_rect(center=(screen_width/2, screen_height/4))
-
     # Create the back button
     button_width, button_height = 100, 50
     button_x, button_y = 20, screen_height - button_height - 20
@@ -919,7 +915,13 @@ def rulesMenu():
 
         # Draw the screen
         screen.fill((255, 255, 255))
-        screen.blit(rules_text, rules_rect)
+        bg = pygame.image.load('assets/instructions.png') 
+        # Set the new size of the image
+        new_size = (int(bg.get_width() * 0.5), int(bg.get_height() * 0.5))
+
+        # Scale the image to the new size
+        bg = pygame.transform.scale(bg, new_size)
+        screen.blit(bg,(0, 0))
         pygame.draw.rect(screen, (0, 0, 0), back_button_rect, 3) # draw outer rectangle
         pygame.draw.rect(screen, (255, 255, 255), back_button_rect.inflate(-6, -6)) # draw inner rectangle
         screen.blit(back_button_text, back_button_text_rect)
