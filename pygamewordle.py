@@ -64,6 +64,18 @@ game_result = ""
 CORRECT_WORDEASY = random.choice(WORDSEASY)
 CORRECT_WORDMED = random.choice(WORDSMED)
 CORRECT_WORDHARD = random.choice(WORDSHARD)
+
+
+
+#Quit button 
+button_width, button_height = 100, 50
+button_x, button_y = 5, 0
+quit_button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+quit_button_text = FONT.render("Quit", True, (0, 0, 0))
+quit_button_text_rect = quit_button_text.get_rect(center=quit_button_rect.center)
+
+
+
 ##############################################################################################################################################################################
 ## FOR MEDIUM MODE
 def mediumMode():
@@ -81,6 +93,14 @@ def mediumMode():
 
     ## Total Number of guesses will be 6
     guessesMED = [[]] * 6
+
+
+
+    # Draws Quit button
+    pygame.draw.rect(SCREEN, (0, 0, 0), quit_button_rect, 3) # draw outer rectangle
+    pygame.draw.rect(SCREEN, (255, 255, 255), quit_button_rect.inflate(-6, -6)) # draw inner rectangle
+    SCREEN.blit(quit_button_text, quit_button_text_rect)
+
 
 
     class Letter:
@@ -286,7 +306,7 @@ def mediumMode():
                         reset()
                         titleScreen()
                     else:
-                        if len(current_guess_string) == 5 and current_guess_string.lower() in WORDSMED:
+                        if len(current_guess_string) == 6 and current_guess_string.lower() in WORDSHARD:
                             check_guess(current_guess)
                 elif event.key == pygame.K_BACKSPACE:
                     if len(current_guess_string) > 0:
@@ -294,8 +314,12 @@ def mediumMode():
                 else:
                     key_pressed = event.unicode.upper()
                     if key_pressed in "QWERTYUIOPASDFGHJKLZXCVBNM" and key_pressed != "":
-                        if len(current_guess_string) < 5:
+                        if len(current_guess_string) < 6:
                             create_new_letter()
+            elif event.type == pygame.MOUSEBUTTONDOWN: 
+                    if quit_button_rect.collidepoint(event.pos):
+                        reset()
+                        titleScreen()
 ##############################################################################################################################################################################
 ## FOR EASY MODE
 def easyMode():
@@ -313,6 +337,12 @@ def easyMode():
     LETTER_Y_SPACINGEASY = 15
 
     guessesEASY = [[]] * 7
+
+
+    # Draws Quit button
+    pygame.draw.rect(SCREEN, (0, 0, 0), quit_button_rect, 3) # draw outer rectangle
+    pygame.draw.rect(SCREEN, (255, 255, 255), quit_button_rect.inflate(-6, -6)) # draw inner rectangle
+    SCREEN.blit(quit_button_text, quit_button_text_rect)
 
 
     class Letter:
@@ -521,7 +551,7 @@ def easyMode():
                         reset()
                         titleScreen()
                     else:
-                        if len(current_guess_string) == 4 and current_guess_string.lower() in WORDSEASY:
+                        if len(current_guess_string) == 6 and current_guess_string.lower() in WORDSHARD:
                             check_guess(current_guess)
                 elif event.key == pygame.K_BACKSPACE:
                     if len(current_guess_string) > 0:
@@ -529,9 +559,12 @@ def easyMode():
                 else:
                     key_pressed = event.unicode.upper()
                     if key_pressed in "QWERTYUIOPASDFGHJKLZXCVBNM" and key_pressed != "":
-                        ## Change length of word you can type
-                        if len(current_guess_string) < 4:
+                        if len(current_guess_string) < 6:
                             create_new_letter()
+            elif event.type == pygame.MOUSEBUTTONDOWN: 
+                    if quit_button_rect.collidepoint(event.pos):
+                        reset()
+                        titleScreen()
 ##############################################################################################################################################################################
 ## FOR HARD MODE
 def hardMode():
@@ -548,6 +581,11 @@ def hardMode():
 
     ## Total Number of guesses will be 4
     guessesHARD = [[]] * 4
+
+    # Draws Quit button
+    pygame.draw.rect(SCREEN, (0, 0, 0), quit_button_rect, 3) # draw outer rectangle
+    pygame.draw.rect(SCREEN, (255, 255, 255), quit_button_rect.inflate(-6, -6)) # draw inner rectangle
+    SCREEN.blit(quit_button_text, quit_button_text_rect)
 
 
     class Letter:
@@ -706,7 +744,6 @@ def hardMode():
         current_guess.pop()
         current_letter_bg_xHARD -= LETTER_X_SPACINGHARD
 
-    
     def upTimer(frame_count):
         frame_rate = 60
         start_time = 240
@@ -764,6 +801,11 @@ def hardMode():
                     if key_pressed in "QWERTYUIOPASDFGHJKLZXCVBNM" and key_pressed != "":
                         if len(current_guess_string) < 6:
                             create_new_letter()
+            elif event.type == pygame.MOUSEBUTTONDOWN: 
+                    if quit_button_rect.collidepoint(event.pos):
+                        reset()
+                        titleScreen()
+                
 ##############################################################################################################################################################################
 ## Title Screen
 def titleScreen():
